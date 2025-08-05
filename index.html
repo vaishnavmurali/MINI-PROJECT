@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Faculty Track - Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="login-box">
+    <h1>Faculty Track Login</h1>
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="password" id="password" placeholder="Password" required>
+
+      <div class="login-role">
+        <button type="button" onclick="setRole('Teacher')" class="teacher">Teacher</button>
+        <button type="button" onclick="setRole('Admin')" class="admin">Admin</button>
+        <button type="button" onclick="setRole('Principal')" class="principal">Principal</button>
+      </div>
+
+      <input type="submit" value="Login" class="submit-btn">
+      <div class="message" id="messageBox"></div>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Faculty Track - College Login</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+    }
+
+    .login-container {
+      background-color: #fff;
+      padding: 40px 30px;
+      border-radius: 15px;
+      width: 400px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      text-align: center;
+    }
+
+    .login-container h1 {
+      margin-bottom: 25px;
+      font-size: 28px;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    .login-role {
+      margin-top: 15px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .login-role button {
+      flex: 1;
+      padding: 10px;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      font-size: 14px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .principal-btn {
+      background-color: #ff6b6b;
+    }
+
+    .admin-btn {
+      background-color: #ffa502;
+    }
+
+    .teacher-btn {
+      background-color: #1dd1a1;
+    }
+
+    .login-role button.selected {
+      border: 2px solid #333;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .submit-btn {
+      margin-top: 20px;
+      width: 100%;
+      background: #4a69bd;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .submit-btn:hover {
+      background: #3b59a1;
+    }
+
+    .message {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .links {
+      margin-top: 15px;
+      font-size: 13px;
+    }
+
+    .links a {
+      color: #4a69bd;
+      text-decoration: none;
+      margin: 0 8px;
+    }
+
+    .links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>Faculty Track Login</h1>
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Faculty Username" required>
+      <input type="password" id="password" placeholder="Password" required>
+
+      <div class="login-role">
+        <button type="button" class="principal-btn" onclick="setRole('Principal', this)">Principal</button>
+        <button type="button" class="admin-btn" onclick="setRole('Admin', this)">Admin</button>
+        <button type="button" class="teacher-btn" onclick="setRole('Teacher', this)">Teacher</button>
+      </div>
+
+      <input type="submit" value="Login" class="submit-btn">
+      <div class="message" id="messageBox"></div>
+      <div class="links">
+        <a href="#">Forgot Password?</a> | <a href="#">Create Account</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    let selectedRole = "";
+
+    function setRole(role, btn) {
+      selectedRole = role;
+      document.querySelectorAll(".login-role button").forEach(button => {
+        button.classList.remove("selected");
+      });
+      btn.classList.add("selected");
+      document.getElementById("messageBox").innerHTML = "Selected Role: <b>" + role + "</b>";
+      document.getElementById("messageBox").style.color = "#333";
+    }
+
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const username = document.getElementById("username").value.trim().toLowerCase();
+      const password = document.getElementById("password").value.trim();
+      const messageBox = document.getElementById("messageBox");
+
+      if (!selectedRole) {
+        messageBox.textContent = "Please select a role!";
+        messageBox.style.color = "red";
+        return;
+      }
+
+      // Simple login validation (mock)
+      if (
+        (username === "admin" && password === "1234") ||
+        (username === "principal" && password === "1234") ||
+        (username === "teacher" && password === "1234")
+      ) {
+        messageBox.style.color = "green";
+        messageBox.innerHTML = `✅ Login successful as <b>${selectedRole}</b>!`;
+
+        // Here, redirect or load dashboard depending on role
+        // window.location.href = `dashboard-${selectedRole.toLowerCase()}.html`;
+
+      } else {
+        messageBox.textContent = "Invalid username or password!";
+        messageBox.style.color = "red";
+      }
+    });
+  </script>
+</body>
+</html>
